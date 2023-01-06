@@ -45,7 +45,7 @@ class MoviesView(Resource):
         new_movie = Movie(**req_json)
         with db.session.begin():
             db.session.add(new_movie)
-        return f"Новый объект с id{db.session.id} создан", 201
+        return f"Новый фильм с id{new_movie.id} создан", 201
 
 
 @movie_ns.route("/<int:movie_id>")
@@ -89,7 +89,7 @@ class DirectorsView(Resource):
         new_director = Director(**req_json)
         with db.session.begin():
             db.session.add(new_director)
-        return f"Новый объект с id{db.session.id} создан", 201
+        return f"Новый режиссёр с id{new_director.id} создан", 201
 
 
 @director_ns.route("/<int:director_id>")
@@ -110,8 +110,8 @@ class DirectorView(Resource):
 
             db.session.add(director)
             db.session.commit()
-            return f"Режессёр с id{director_id} обнавлён.", 204
-        return f"Режессёр не найден", 404
+            return f"Режиссёр с id{director_id} обнавлён.", 204
+        return f"Режиссёр не найден", 404
 
 
 @genre_ns.route("/")
@@ -125,10 +125,10 @@ class GenresView(Resource):
 
     def post(self):
         req_json = request.json
-        all_genres = Genre(**req_json)
+        new_genres = Genre(**req_json)
         with db.session.begin():
-            db.session.add(all_genres)
-        return f"Новый объект с id{db.session.id} создан", 201
+            db.session.add(new_genres)
+        return f"Новый жанр с id{new_genres.id} создан", 201
 
 
 @genre_ns.route("/<int:genre_id>")
